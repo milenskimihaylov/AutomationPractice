@@ -18,7 +18,7 @@ public static class DriverExtensions
     public static void HighLight(this IWebDriver driver, IWebElement element)
     {
         var colorBefore = element.GetCssValue("background-color");
-        ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].style.backgroundColor = 'red';", element);
+        ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].style.backgroundColor = 'green';", element);
         Thread.Sleep(500);
         ((IJavaScriptExecutor)driver).ExecuteScript($"arguments[0].style.backgroundColor = '{colorBefore}';", element);
     }
