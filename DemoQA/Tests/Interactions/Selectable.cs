@@ -44,24 +44,24 @@ namespace DemoQA.Tests.Interactions
         public void SelectMultipleElementsFromAList()
         {
             _selectablePage.TabList.Click();
-            string firstElementColorBefore = _selectablePage.ElementFromTheList(1).GetCssValue("background-color");
-            string secondElementColorBefore = _selectablePage.ElementFromTheList(2).GetCssValue("background-color");
-            string thirdElementColorBefore = _selectablePage.ElementFromTheList(3).GetCssValue("background-color");
-            string fourthElementColorBefore = _selectablePage.ElementFromTheList(4).GetCssValue("background-color");
+            string[] elementsBackgroundColorBefore = GetBackgroundColor(_selectablePage.ElementFromTheList(1), 
+                                                                  _selectablePage.ElementFromTheList(2), 
+                                                                  _selectablePage.ElementFromTheList(3), 
+                                                                  _selectablePage.ElementFromTheList(4));
 
             _selectablePage.ElementFromTheList(1).Click();
             _selectablePage.ElementFromTheList(2).Click();
             _selectablePage.ElementFromTheList(3).Click();
 
-            string firstElementColorAfter = _selectablePage.ElementFromTheList(1).GetCssValue("background-color");
-            string secondElementColorAfter = _selectablePage.ElementFromTheList(2).GetCssValue("background-color");
-            string thirdElementColorAfter = _selectablePage.ElementFromTheList(3).GetCssValue("background-color");
-            string fourthElementColorAfter = _selectablePage.ElementFromTheList(4).GetCssValue("background-color");
+            string[] elementsBackgroundColorAfter = GetBackgroundColor(_selectablePage.ElementFromTheList(1),
+                                                                  _selectablePage.ElementFromTheList(2),
+                                                                  _selectablePage.ElementFromTheList(3),
+                                                                  _selectablePage.ElementFromTheList(4));
 
-            Assert.AreNotEqual(firstElementColorBefore, firstElementColorAfter);
-            Assert.AreNotEqual(secondElementColorBefore, secondElementColorAfter);
-            Assert.AreNotEqual(thirdElementColorBefore, thirdElementColorAfter);
-            Assert.AreEqual(fourthElementColorBefore, fourthElementColorAfter);
+            Assert.AreNotEqual(elementsBackgroundColorBefore[0], elementsBackgroundColorAfter[0]);
+            Assert.AreNotEqual(elementsBackgroundColorBefore[1], elementsBackgroundColorAfter[1]);
+            Assert.AreNotEqual(elementsBackgroundColorBefore[2], elementsBackgroundColorAfter[2]);
+            Assert.AreEqual(elementsBackgroundColorBefore[3], elementsBackgroundColorAfter[3]);
         }
         [Test]
         [TestCase("One")]
@@ -88,24 +88,24 @@ namespace DemoQA.Tests.Interactions
         public void SelectMultipleElementsFromAGrid()
         {
             _selectablePage.TabGrid.Click();
-            string firstElementColorBefore = _selectablePage.ElementFromTheGrid("One").GetCssValue("background-color");
-            string thirdElementColorBefore = _selectablePage.ElementFromTheGrid("Three").GetCssValue("background-color");
-            string fifthElementColorBefore = _selectablePage.ElementFromTheGrid("Five").GetCssValue("background-color");
-            string ninthElementColorBefore = _selectablePage.ElementFromTheGrid("Nine").GetCssValue("background-color");
+            string[] elementsBackgroundColorBefore = GetBackgroundColor(_selectablePage.ElementFromTheGrid("One"),
+                                                                        _selectablePage.ElementFromTheGrid("Three"),
+                                                                        _selectablePage.ElementFromTheGrid("Five"),
+                                                                        _selectablePage.ElementFromTheGrid("Nine"));
 
             _selectablePage.ElementFromTheGrid("One").Click();
             _selectablePage.ElementFromTheGrid("Five").Click();
             _selectablePage.ElementFromTheGrid("Nine").Click();
 
-            string firstElementColorAfter = _selectablePage.ElementFromTheGrid("One").GetCssValue("background-color");
-            string thirdElementColorAfter = _selectablePage.ElementFromTheGrid("Three").GetCssValue("background-color");
-            string fifthElementColorAfter = _selectablePage.ElementFromTheGrid("Five").GetCssValue("background-color");
-            string ninthElementColorAfter = _selectablePage.ElementFromTheGrid("Nine").GetCssValue("background-color");
+            string[] elementsBackgroundColorAfter = GetBackgroundColor(_selectablePage.ElementFromTheGrid("One"),
+                                                                        _selectablePage.ElementFromTheGrid("Three"),
+                                                                        _selectablePage.ElementFromTheGrid("Five"),
+                                                                        _selectablePage.ElementFromTheGrid("Nine"));
 
-            Assert.AreNotEqual(firstElementColorBefore, firstElementColorAfter);
-            Assert.AreEqual(thirdElementColorBefore, thirdElementColorAfter);
-            Assert.AreNotEqual(fifthElementColorBefore, fifthElementColorAfter);
-            Assert.AreNotEqual(ninthElementColorBefore, ninthElementColorAfter);
+            Assert.AreNotEqual(elementsBackgroundColorBefore[0], elementsBackgroundColorAfter[0]);
+            Assert.AreEqual(elementsBackgroundColorBefore[1], elementsBackgroundColorAfter[1]);
+            Assert.AreNotEqual(elementsBackgroundColorBefore[2], elementsBackgroundColorAfter[2]);
+            Assert.AreNotEqual(elementsBackgroundColorBefore[3], elementsBackgroundColorAfter[3]);
         }
     }
 }

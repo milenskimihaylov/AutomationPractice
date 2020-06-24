@@ -81,5 +81,17 @@ namespace DemoQA
             };
             return rightBottomCornerCoordinates;
         }
+
+        public string[] GetBackgroundColor(params IWebElement[] pageElement)
+        {
+            int i = 0;
+            string[] elementBackgroundColor = new string[pageElement.Length];
+            foreach (var element in pageElement)
+            {
+                elementBackgroundColor[i] = element.GetCssValue("background-color");
+                i++;
+            }
+            return elementBackgroundColor;
+        }
     }
 }
