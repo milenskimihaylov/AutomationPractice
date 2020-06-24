@@ -4,7 +4,6 @@ using AutomationPractice.Pages;
 using DemoQA;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using POM_Exercises;
 
 namespace AutomationPractice.Tests
 {
@@ -36,6 +35,12 @@ namespace AutomationPractice.Tests
             Driver.Quit();
         }
 
+        public void SelectStateAndSubmitAccount(string state)
+        {
+            SelectElementFromList(_automationPracticeFormPage.StateField, state);
+            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+        }
+
         [Test]
         public void RegistrationEmailCheck()
         {              
@@ -55,8 +60,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>firstname</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>firstname</b> is required.");
 
@@ -69,8 +73,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>lastname</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>lastname</b> is required.");
         }
@@ -82,8 +85,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>passwd</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>passwd</b> is required.");
         }
@@ -93,8 +95,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>address1</b> is required.");
 
             _automationPracticeFormPage.FillForm("Pesho", "Gosho", "wsafaf124sdf","", "", "Montana", "12345", "123142543531");
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>address1</b> is required.");
         }
@@ -106,8 +107,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>city</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>city</b> is required.");
         }
@@ -119,8 +119,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<li>You must register at least one phone number.</li>");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<li>You must register at least one phone number.</li>");
         }
@@ -132,8 +131,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<li>The Zip/Postal code you&#039;ve entered is invalid. It must follow this format: 00000</li>");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<li>The Zip/Postal code you&#039;ve entered is invalid. It must follow this format: 00000</li>");
         }
@@ -143,8 +141,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>email</b> is required.");
 
             _automationPracticeFormPage.FillForm("Pesho", "Gosho", "wsafaf124sdf", "none", "OK, Montana", "Montana", "12345", "123142543531");
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>email</b> is required.");
         }
@@ -154,8 +151,7 @@ namespace AutomationPractice.Tests
             _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<li>An account using this email address has already been registered.</li>");
 
             _automationPracticeFormPage.FillForm("Pesho", "Gosho", "wsafaf124sdf", "pesho1@gmail.com", "OK, Montana", "Montana", "12345", "123142543531");
-            SelectElementFromList(_automationPracticeFormPage.StateField, _user.State);
-            Driver.ScrollToElement(_automationPracticeFormPage.SubmitAccountButton).Click();
+            SelectStateAndSubmitAccount(_user.State);
 
             _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<li>An account using this email address has already been registered.</li>");
         }
