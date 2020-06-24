@@ -24,4 +24,8 @@
     <ProjectReference Include="..\DemoQA\DemoQA.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Screenshots\" />
+  </ItemGroup>
+
 </Project>

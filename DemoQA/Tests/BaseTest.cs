@@ -7,6 +7,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace DemoQA
 {
@@ -30,6 +31,15 @@ namespace DemoQA
             Builder = new Actions(Driver);
             JS = (IJavaScriptExecutor)Driver;            
             Driver.Manage().Window.Maximize();
+        }
+
+        public void TakeScreenshot(string relativePath)
+        {
+            string dirPath = Path.GetFullPath(@relativePath, Directory.GetCurrentDirectory());
+            Thread.Sleep(500);
+            var screenshot = ((ITakesScreenshot)Driver).GetScreenshot();
+            string testName = TestContext.CurrentContext.Test.Name.Replace("\"", "");
+            screenshot.SaveAsFile($"{dirPath}\\Screenshots\\{testName}_{DateTime.Now:ddMMyy-HH_mm}.png", ScreenshotImageFormat.Png);
         }
         public void TypeInInputField(IWebElement element, string input)
         {

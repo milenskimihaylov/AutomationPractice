@@ -3,6 +3,7 @@
 using AutomationPractice.Pages;
 using DemoQA;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 
 namespace AutomationPractice.Tests
@@ -23,6 +24,11 @@ namespace AutomationPractice.Tests
         [TearDown]
         public void TearDown()
         {
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                TakeScreenshot(@"..\..\..\");
+            }
+
             Driver.Quit();
         }
 

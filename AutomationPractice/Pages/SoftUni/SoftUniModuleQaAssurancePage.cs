@@ -14,6 +14,6 @@ namespace AutomationPractice.Pages
         {
         }
 
-        public IWebElement QAModuleAutomationCourse => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//a[contains(@href, 'qa-automation-may-2020')]")));
+        public IWebElement QAModuleAutomationCourse => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//a[contains(@href, 'qa-automation-may-2020')]/div[@class='box-content']")));
     }
 }

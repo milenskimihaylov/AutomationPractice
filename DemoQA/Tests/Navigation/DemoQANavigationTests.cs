@@ -1,6 +1,11 @@
 ﻿using DemoQA.Pages.DemoQA;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using NUnit.Framework.Internal;
 using OpenQA.Selenium;
+using System;
+using System.IO;
+using System.Threading;
 
 namespace DemoQA.Tests.Navigation
 {
@@ -23,6 +28,11 @@ namespace DemoQA.Tests.Navigation
         [TearDown]
         public void TearDown()
         {
+            if(TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                TakeScreenshot(@"..\..\..\");
+            }
+
             Driver.Quit();
         }
         [Test]

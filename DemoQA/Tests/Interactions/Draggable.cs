@@ -1,5 +1,6 @@
 ﻿using DemoQA.Pages.DemoQA;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System.Drawing;
 
 namespace DemoQA.Tests.Interactions
@@ -20,6 +21,11 @@ namespace DemoQA.Tests.Interactions
         [TearDown]
         public void TearDown()
         {
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                TakeScreenshot(@"..\..\..\");
+            }
+
             Driver.Quit();
         }
         [Test]
