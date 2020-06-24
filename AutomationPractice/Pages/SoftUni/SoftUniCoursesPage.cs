@@ -20,5 +20,12 @@ namespace AutomationPractice.Pages
 
         public IWebElement QualityAssuranceModule => Wait.Until(d => d.FindElement(By.XPath("//a[contains(text(),'Quality Assurance - октомври 2019')]")));
         
+        public void CourseNavigation()
+        {
+            SoftUniMainPage _softUniMainPage = new SoftUniMainPage(Driver);
+            _softUniMainPage.NavigationBarTrainings[1].Click();
+            ActiveModules[1].Click();
+            QualityAssuranceModule.Click();
+        }
     }
 }
