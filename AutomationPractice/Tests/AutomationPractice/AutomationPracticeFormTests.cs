@@ -1,11 +1,9 @@
-﻿using AutoFixture;
-using AutomationPractice.Factories;
+﻿using AutomationPractice.Factories;
 using AutomationPractice.Models;
 using AutomationPractice.Pages;
 using DemoQA;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using OpenQA.Selenium;
 using POM_Exercises;
 
 namespace AutomationPractice.Tests
@@ -13,7 +11,6 @@ namespace AutomationPractice.Tests
     [TestFixture]
     public class AutomationPracticeFormTests : BaseTest
     {
-        private AutomationPracticeMainPage _automationPracticeMainPage;
         private AutomationPracticeLoginPage _automationPracticeLoginPage;
         private AutomationPracticeFormPage _automationPracticeFormPage;
         private AutomationPracticeFormModel _user;
@@ -23,13 +20,10 @@ namespace AutomationPractice.Tests
         {
             Initialize();
             Driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
-            _automationPracticeMainPage = new AutomationPracticeMainPage(Driver);
             _automationPracticeLoginPage = new AutomationPracticeLoginPage(Driver);
             _automationPracticeFormPage = new AutomationPracticeFormPage(Driver);
-            _user = AutomationPracticeFormFactory.CreateUser();           
-            _automationPracticeMainPage.SignInButton.Click();
-            TypeInInputField(_automationPracticeLoginPage.EmailAddressTextBox, _user.Email);
-            _automationPracticeLoginPage.CreateAnAccountButton.Click();
+            _user = AutomationPracticeFormFactory.CreateUser();
+            _automationPracticeLoginPage.GoToCreateAnAccountForm(_user.Email);
         }
         [TearDown]
         public void TearDown()

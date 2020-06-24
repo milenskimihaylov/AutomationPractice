@@ -22,8 +22,8 @@ namespace AutomationPractice.Pages
         
         public void CourseNavigation()
         {
-            SoftUniMainPage _softUniMainPage = new SoftUniMainPage(Driver);
-            _softUniMainPage.NavigationBarTrainings[1].Click();
+            SoftUniMainPage softUniMainPage = new SoftUniMainPage(Driver);
+            softUniMainPage.NavigationBarTrainings[1].Click();
             ActiveModules[1].Click();
             QualityAssuranceModule.Click();
         }
