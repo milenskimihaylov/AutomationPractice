@@ -1,25 +1,26 @@
-﻿using NUnit.Framework;
+﻿using DemoQA.Core;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace DemoQA.Pages.DemoQA
 {
     public class LeftPannelAndMainHeaderSection : BasePage
     {
-        public LeftPannelAndMainHeaderSection(IWebDriver driver)
+        public LeftPannelAndMainHeaderSection(WebDriver driver)
             :base(driver)
         {
         }
 
-        public IWebElement MainHeader => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//div[@class='main-header']")));
+        public WebElement MainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
 
-        public IWebElement SectionLeftPannel(string section)
+        public WebElement SectionLeftPannel(string section)
         {
-            return Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath($"//div[@class='header-text' and text()='{section}']")));
+            return Driver.FindElement(By.XPath($"//div[@class='header-text' and text()='{section}']"));
         }
 
-        public IWebElement InteractionsSection(string section)
+        public WebElement InteractionsSection(string section)
         {
-            return Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath($"//li/span[text()='{section}']")));
+            return Driver.FindElement(By.XPath($"//li/span[text()='{section}']"));
         }
 
         public void AssertSection(string expectedSection, string actualSection)

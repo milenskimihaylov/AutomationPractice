@@ -1,3 +1,4 @@
+using DemoQA.Core;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -14,11 +15,9 @@ namespace DemoQA
     [TestFixture]
     public class BaseTest
     {
-        protected IWebDriver Driver { get; set; }
+        protected WebDriver Driver { get; set; }
 
         protected Actions Builder { get; set; }
-
-        protected WebDriverWait Wait { get; set; }
 
         protected SelectElement Select { get; set; }
 
@@ -26,35 +25,30 @@ namespace DemoQA
 
         public void Initialize()
         {
-            Driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
-            Builder = new Actions(Driver);
-            JS = (IJavaScriptExecutor)Driver;            
-            Driver.Manage().Window.Maximize();
+            Driver = new WebDriver();
+            Driver.Start(Browser.Chrome);
+            Builder = new Actions(Driver.WrappedDriver);
+            JS = (IJavaScriptExecutor)Driver.WrappedDriver;            
+            Driver.WrappedDriver.Manage().Window.Maximize();
         }
 
         public void TakeScreenshot(string relativePath)
         {
             string dirPath = Path.GetFullPath(@relativePath, Directory.GetCurrentDirectory());
             Thread.Sleep(500);
-            var screenshot = ((ITakesScreenshot)Driver).GetScreenshot();
+            var screenshot = ((ITakesScreenshot)Driver.WrappedDriver).GetScreenshot();
             string testName = TestContext.CurrentContext.Test.Name.Replace("\"", "");
             screenshot.SaveAsFile($"{dirPath}\\Screenshots\\{testName}_{DateTime.Now:ddMMyy-HH_mm}.png", ScreenshotImageFormat.Png);
         }
-        public void TypeInInputField(IWebElement element, string input)
-        {
-            element.Clear();
-            element.SendKeys(input);
-        }
 
-        public void SelectElementFromList(IWebElement element, string option)
+        public void SelectElementFromList(WebElement element, string option)
         {
-            Builder.MoveToElement(element).Click();
-            Select = new SelectElement(element);
+            Builder.MoveToElement(element.WrappedElement).Click();
+            Select = new SelectElement(element.WrappedElement);
             Select.SelectByValue(option);
         }
 
-        public Point ElementLocation(IWebElement element)
+        public Point ElementLocation(WebElement element)
         {
             Point Location = element.Location;
             return Location;
@@ -72,7 +66,7 @@ namespace DemoQA
             }
         }
 
-        public Point RectangleRightBottomCornerCoordinates(IWebElement element)
+        public Point RectangleRightBottomCornerCoordinates(WebElement element)
         {
             Point rightBottomCornerCoordinates = new Point
             {
@@ -82,7 +76,7 @@ namespace DemoQA
             return rightBottomCornerCoordinates;
         }
 
-        public string[] GetBackgroundColor(params IWebElement[] pageElement)
+        public string[] GetBackgroundColor(params WebElement[] pageElement)
         {
             int i = 0;
             string[] elementBackgroundColor = new string[pageElement.Length];

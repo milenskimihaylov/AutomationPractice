@@ -1,18 +1,19 @@
-﻿using OpenQA.Selenium;
+﻿using DemoQA.Core;
+using OpenQA.Selenium;
 
 namespace DemoQA.Pages.DemoQA
 {
     public class MainPage : BasePage
     {
-        public MainPage(IWebDriver driver)
+        public MainPage(WebDriver driver)
             :base(driver)
         {
         }
 
         public string URL { get { return "http://demoqa.com/"; } }
-        public IWebElement SectionCard(string cardName)
+        public WebElement SectionCard(string cardName)
         {
-            return Wait.Until(d => d.FindElement(By.XPath($"//div[@class='card-body']/h5[text()='{cardName}']")));
+            return Driver.FindElement(By.XPath($"//div[@class='card-body']/h5[text()='{cardName}']"));
         }
     }
 }
