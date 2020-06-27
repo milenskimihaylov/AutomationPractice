@@ -17,7 +17,7 @@ namespace AutomationPractice.Tests
         public void SetUp()
         {
             Initialize();
-            Driver.Navigate().GoToUrl("http://www.google.com");
+            Driver.GoToUrl("http://www.google.com");
             _googleSearchPage = new GoogleSearchPage(Driver);
         }
 

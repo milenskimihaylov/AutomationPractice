@@ -11,16 +11,16 @@ public static class DriverExtensions
 
     public static WebElement ScrollToElement(this WebDriver driver, WebElement element)
     {
-        ((IJavaScriptExecutor)driver.WrappedDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+        ((IJavaScriptExecutor)driver.WrappedDriver).ExecuteScript("arguments[0].scrollIntoView(true);", element.WrappedElement);
         return element;
     }
 
     public static void HighLight(this WebDriver driver, WebElement element)
     {
         var colorBefore = element.GetCssValue("background-color");
-        ((IJavaScriptExecutor)driver.WrappedDriver).ExecuteScript("arguments[0].style.backgroundColor = 'green';", element);
+        ((IJavaScriptExecutor)driver.WrappedDriver).ExecuteScript("arguments[0].style.backgroundColor = 'green';", element.WrappedElement);
         Thread.Sleep(500);
-        ((IJavaScriptExecutor)driver.WrappedDriver).ExecuteScript($"arguments[0].style.backgroundColor = '{colorBefore}';", element);
+        ((IJavaScriptExecutor)driver.WrappedDriver).ExecuteScript($"arguments[0].style.backgroundColor = '{colorBefore}';", element.WrappedElement);
     }
 
     /*public static Point MouseCoordinates(this IWebDriver driver)

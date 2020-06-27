@@ -1,4 +1,5 @@
 ﻿
+using DemoQA.Core;
 using DemoQA.Pages;
 using OpenQA.Selenium;
 using POM_Exercises;
@@ -7,13 +8,13 @@ namespace AutomationPractice.Pages
 {
     public class AutomationPracticeLoginPage : BasePage
     {
-        public AutomationPracticeLoginPage(IWebDriver driver)
+        public AutomationPracticeLoginPage(WebDriver driver)
             :base(driver)
         {
         }
-        public IWebElement EmailAddressTextBox => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("email_create")));
+        public WebElement EmailAddressTextBox => Driver.FindClickableElement(By.Id("email_create"));
 
-        public IWebElement CreateAnAccountButton => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("SubmitCreate")));
+        public WebElement CreateAnAccountButton => Driver.FindClickableElement(By.Id("SubmitCreate"));
         
         public void GoToCreateAnAccountForm(string email)
         {

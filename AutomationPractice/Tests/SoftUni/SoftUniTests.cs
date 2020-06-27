@@ -1,6 +1,7 @@
 ﻿
 using AutomationPractice.Pages;
 using DemoQA;
+using DemoQA.Core;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -18,7 +19,7 @@ namespace AutomationPractice.Tests
         public void SetUp()
         {
             Initialize();
-            Driver.Navigate().GoToUrl("http://www.softuni.bg");
+            Driver.GoToUrl("http://www.softuni.bg");
             _softUniCoursesPage = new SoftUniCoursesPage(Driver);
             _softUniModuleQaAssurancePage = new SoftUniModuleQaAssurancePage(Driver);
             _qaAutomationCoursePage = new QaAutomationCoursePage(Driver);
@@ -42,7 +43,7 @@ namespace AutomationPractice.Tests
 
             Driver.ScrollToElement(_softUniModuleQaAssurancePage.QAModuleAutomationCourse).Click();
 
-            IWebElement QaAutomationCourseHeading = _qaAutomationCoursePage.H1Title;
+            WebElement QaAutomationCourseHeading = _qaAutomationCoursePage.H1Title;
 
             _qaAutomationCoursePage.AssertH1Title(QaAutomationCourseHeading);
 

@@ -1,12 +1,12 @@
 ﻿using AutomationPractice.Models;
+using DemoQA.Core;
 using DemoQA.Pages;
-using OpenQA.Selenium;
 
 namespace AutomationPractice.Pages
 {
     public partial class AutomationPracticeFormPage : BasePage
     {
-        public AutomationPracticeFormPage(IWebDriver driver)
+        public AutomationPracticeFormPage(WebDriver driver)
             :base(driver)
         {
         }
@@ -58,8 +58,7 @@ namespace AutomationPractice.Pages
                 } else
                 {
                     Driver.ScrollToElement(EmailField);
-                    EmailField.Clear();
-                    EmailField.SendKeys(email);
+                    EmailField.TypeText(email);
                 } 
             }
             if (address != "")

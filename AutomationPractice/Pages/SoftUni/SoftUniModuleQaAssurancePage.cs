@@ -1,5 +1,6 @@
 ﻿
 
+using DemoQA.Core;
 using DemoQA.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -9,11 +10,11 @@ namespace AutomationPractice.Pages
 {
     public class SoftUniModuleQaAssurancePage : BasePage
     {
-        public SoftUniModuleQaAssurancePage(IWebDriver driver)
+        public SoftUniModuleQaAssurancePage(WebDriver driver)
             :base(driver)
         {
         }
 
-        public IWebElement QAModuleAutomationCourse => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//a[contains(@href, 'qa-automation-may-2020')]/div[@class='box-content']")));
+        public WebElement QAModuleAutomationCourse => Driver.FindClickableElement(By.XPath("//a[contains(@href, 'qa-automation-may-2020')]/div[@class='box-content']"));
     }
 }

@@ -1,29 +1,30 @@
-﻿using DemoQA.Pages;
+﻿using DemoQA.Core;
+using DemoQA.Pages;
 using OpenQA.Selenium;
 
 namespace AutomationPractice.Pages
 {
     public partial class AutomationPracticeFormPage : BasePage
     {
-        public IWebElement FirstNameField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("customer_firstname")));
+        public WebElement FirstNameField => Driver.FindClickableElement(By.Id("customer_firstname"));
 
-        public IWebElement LastNameField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("customer_lastname")));
+        public WebElement LastNameField => Driver.FindClickableElement(By.Id("customer_lastname"));
 
-        public IWebElement EmailField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("email")));
+        public WebElement EmailField => Driver.FindClickableElement(By.Id("email"));
 
-        public IWebElement PasswordField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("passwd")));
+        public WebElement PasswordField => Driver.FindClickableElement(By.Id("passwd"));
 
-        public IWebElement AddressField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("address1")));
+        public WebElement AddressField => Driver.FindClickableElement(By.Id("address1"));
 
-        public IWebElement CityField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("city")));
+        public WebElement CityField => Driver.FindClickableElement(By.Id("city"));
 
-        public IWebElement StateField => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("id_state")));
+        public WebElement StateField => Driver.FindExistingElement(By.Id("id_state"));
 
-        public IWebElement PostalCode => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("postcode")));
+        public WebElement PostalCode => Driver.FindClickableElement(By.Id("postcode"));
 
-        public IWebElement MobilePhone => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("phone_mobile")));
+        public WebElement MobilePhone => Driver.FindClickableElement(By.Id("phone_mobile"));
 
-        public IWebElement SubmitAccountButton => Wait.Until(d => d.FindElement(By.Id("submitAccount")));
+        public WebElement SubmitAccountButton => Driver.FindElement(By.Id("submitAccount"));
 
     }
 }

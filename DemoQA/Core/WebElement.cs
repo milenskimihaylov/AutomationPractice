@@ -25,6 +25,17 @@ namespace DemoQA.Core
             By = by;
         }
 
+        public void SendKeys(string text)
+        {
+            Debug.WriteLine($"Text {text} is weritten in element with locator {By}");
+            WrappedElement.SendKeys(text);
+        }
+
+        public void Clear()
+        {
+            WrappedElement.Clear();
+        }
+
         public void TypeText(string text)
         {
             Debug.WriteLine($"Text {text} is weritten in element with locator {By}");
@@ -91,6 +102,14 @@ namespace DemoQA.Core
         public WebElement FindClickableElement(By by)
         {
             IWebElement nativeWebElement = Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
+            WebElement element = new WebElement(WrappedDriver, nativeWebElement, by);
+
+            return element;
+        }
+
+        public WebElement FindVisibleElement(By by)
+        {
+            IWebElement nativeWebElement = Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
             WebElement element = new WebElement(WrappedDriver, nativeWebElement, by);
 
             return element;

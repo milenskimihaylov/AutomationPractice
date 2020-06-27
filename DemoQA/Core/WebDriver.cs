@@ -86,6 +86,14 @@ namespace DemoQA.Core
             return element;
         }
 
+        public WebElement FindVisibleElement(By locator)
+        {
+            IWebElement nativeWebElement = _webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
+            WebElement element = new WebElement(WrappedDriver, nativeWebElement, locator);
+
+            return element;
+        }
+
         public List<WebElement> FindElements(By locator)
         {
             ReadOnlyCollection<IWebElement> nativeWebElements = _webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(locator));

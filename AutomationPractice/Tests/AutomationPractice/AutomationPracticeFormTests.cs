@@ -18,7 +18,7 @@ namespace AutomationPractice.Tests
         public void SetUp()
         {
             Initialize();
-            Driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
+            Driver.GoToUrl("http://automationpractice.com/index.php");
             _automationPracticeLoginPage = new AutomationPracticeLoginPage(Driver);
             _automationPracticeFormPage = new AutomationPracticeFormPage(Driver);
             _user = AutomationPracticeFormFactory.CreateUser();
@@ -57,12 +57,12 @@ namespace AutomationPractice.Tests
         {
             _user.FirstName = string.Empty;
 
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>firstname</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<b>firstname</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>firstname</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<b>firstname</b> is required.");
 
         }
         [Test]
@@ -70,90 +70,90 @@ namespace AutomationPractice.Tests
         {
             _user.LastName = string.Empty;
 
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>lastname</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<b>lastname</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>lastname</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<b>lastname</b> is required.");
         }
         [Test]
         public void TryToRegister_without_PasswordFilled()
         {
             _user.Password = string.Empty;
 
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>passwd</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<b>passwd</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>passwd</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<b>passwd</b> is required.");
         }
         [Test]
         public void TryToRegister_without_AddressFilled()
         {
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>address1</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<b>address1</b> is required.");
 
             _automationPracticeFormPage.FillForm("Pesho", "Gosho", "wsafaf124sdf","", "", "Montana", "12345", "123142543531");
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>address1</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<b>address1</b> is required.");
         }
         [Test]
         public void TryToRegister_without_CityFilled()
         {
             _user.City = string.Empty;
 
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>city</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<b>city</b> is required.");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>city</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<b>city</b> is required.");
         }
         [Test]
         public void TryToRegister_without_PhoneNumberFilled()
         {
             _user.MobilePhone = string.Empty;
 
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<li>You must register at least one phone number.</li>");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<li>You must register at least one phone number.</li>");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<li>You must register at least one phone number.</li>");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<li>You must register at least one phone number.</li>");
         }
         [Test]
         public void TryToRegister_without_PostalCodeFilled()
         {
             _user.PostalCode = string.Empty;
 
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<li>The Zip/Postal code you&#039;ve entered is invalid. It must follow this format: 00000</li>");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<li>The Zip/Postal code you&#039;ve entered is invalid. It must follow this format: 00000</li>");
 
             _automationPracticeFormPage.FillFormWithoutEmail(_user);
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<li>The Zip/Postal code you&#039;ve entered is invalid. It must follow this format: 00000</li>");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<li>The Zip/Postal code you&#039;ve entered is invalid. It must follow this format: 00000</li>");
         }
         [Test]
         public void TryToRegister_without_EmailFilled()
         {
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<b>email</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<b>email</b> is required.");
 
             _automationPracticeFormPage.FillForm("Pesho", "Gosho", "wsafaf124sdf", "none", "OK, Montana", "Montana", "12345", "123142543531");
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<b>email</b> is required.");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<b>email</b> is required.");
         }
         [Test]
         public void TryToRegister_with_EmailThatIsAlreadyUsed()
         {
-            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource, "<li>An account using this email address has already been registered.</li>");
+            _automationPracticeFormPage.AssertPageSourceDoesNotContain(Driver.PageSource(), "<li>An account using this email address has already been registered.</li>");
 
             _automationPracticeFormPage.FillForm("Pesho", "Gosho", "wsafaf124sdf", "pesho1@gmail.com", "OK, Montana", "Montana", "12345", "123142543531");
             SelectStateAndSubmitAccount(_user.State);
 
-            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource, "<li>An account using this email address has already been registered.</li>");
+            _automationPracticeFormPage.AssertPageSourceContains(Driver.PageSource(), "<li>An account using this email address has already been registered.</li>");
         }
     }
     
