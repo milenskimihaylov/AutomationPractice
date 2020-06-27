@@ -15,7 +15,7 @@ namespace DemoQA.Tests.Interactions
         {
             Initialize();
             _selectablePage = new SelectablePage(Driver);
-            Driver.Navigate().GoToUrl(_selectablePage.URL);
+            Driver.GoToUrl(_selectablePage.URL);
         }
 
         [TearDown]
@@ -32,11 +32,11 @@ namespace DemoQA.Tests.Interactions
         public void SelectElementFromAList([Range(1, 4)] int elementNumber)
         {
             _selectablePage.TabList.Click();
-            string elementColorBefore = _selectablePage.ElementFromTheList(elementNumber).GetCssValue("background-color");
+            string[] elementColorBefore = GetBackgroundColor(_selectablePage.ElementFromTheList(elementNumber));
 
             _selectablePage.ElementFromTheList(elementNumber).Click();
 
-            string elementColorAfter = _selectablePage.ElementFromTheList(elementNumber).GetCssValue("background-color");
+            string[] elementColorAfter = GetBackgroundColor(_selectablePage.ElementFromTheList(elementNumber));
 
             Assert.AreNotEqual(elementColorBefore, elementColorAfter);
         }
@@ -76,11 +76,11 @@ namespace DemoQA.Tests.Interactions
         public void SelectElementFromAGrid(string element)
         {
             _selectablePage.TabGrid.Click();
-            string elementColorBefore = _selectablePage.ElementFromTheGrid(element).GetCssValue("background-color");
+            string[] elementColorBefore = GetBackgroundColor(_selectablePage.ElementFromTheGrid(element));
 
             _selectablePage.ElementFromTheGrid(element).Click();
 
-            string elementColorAfter = _selectablePage.ElementFromTheGrid(element).GetCssValue("background-color");
+            string[] elementColorAfter = GetBackgroundColor(_selectablePage.ElementFromTheGrid(element));
 
             Assert.AreNotEqual(elementColorBefore, elementColorAfter);
         }

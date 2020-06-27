@@ -1,35 +1,35 @@
-﻿using OpenQA.Selenium;
-using System.Threading;
+﻿using DemoQA.Core;
+using OpenQA.Selenium;
 
 namespace DemoQA.Pages.DemoQA
 {
     public class DroppablePage : BasePage
     {
-        public DroppablePage(IWebDriver driver)
+        public DroppablePage(WebDriver driver)
             :base(driver)
         {
         }
 
         public string URL { get { return "http://demoqa.com/droppable"; } }
 
-        public IWebElement TabSimple => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//a[@id='droppableExample-tab-simple']")));
+        public WebElement TabSimple => Driver.FindExistingElement(By.XPath("//a[@id='droppableExample-tab-simple']"));
 
-        public IWebElement DragBox => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("draggable")));
+        public WebElement DragBox => Driver.FindClickableElement(By.Id("draggable"));
 
-        public IWebElement DropBoxTabSimple => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("droppable")));
+        public WebElement DropBoxTabSimple => Driver.FindClickableElement(By.Id("droppable"));
 
-        public IWebElement TabAccept => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//a[@id='droppableExample-tab-accept']")));
+        public WebElement TabAccept => Driver.FindExistingElement(By.XPath("//a[@id='droppableExample-tab-accept']"));
 
-        public IWebElement DragBoxNotAcceptable => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("notAcceptable")));
+        public WebElement DragBoxNotAcceptable => Driver.FindClickableElement(By.Id("notAcceptable"));
 
-        public IWebElement DropBoxTabAccept => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='acceptDropContainer']/*[2]")));
+        public WebElement DropBoxTabAccept => Driver.FindClickableElement(By.XPath("//div[@id='acceptDropContainer']/*[2]"));
 
-        public IWebElement TabPreventPropagation => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//a[@id='droppableExample-tab-preventPropogation']")));
+        public WebElement TabPreventPropagation => Driver.FindExistingElement(By.XPath("//a[@id='droppableExample-tab-preventPropogation']"));
 
-        public IWebElement DragBoxWillRevert => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("revertable")));
+        public WebElement DragBoxWillRevert => Driver.FindClickableElement(By.Id("revertable"));
 
-        public IWebElement DropBoxTabRevert => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='revertableDropContainer']/*[2]")));
+        public WebElement DropBoxTabRevert => Driver.FindClickableElement(By.XPath("//div[@id='revertableDropContainer']/*[2]"));
 
-        public IWebElement TabRevertDraggable => Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//a[@id='droppableExample-tab-revertable']")));
+        public WebElement TabRevertDraggable => Driver.FindExistingElement(By.XPath("//a[@id='droppableExample-tab-revertable']"));
     }
 }

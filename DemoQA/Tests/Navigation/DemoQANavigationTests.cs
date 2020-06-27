@@ -2,10 +2,6 @@
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
-using OpenQA.Selenium;
-using System;
-using System.IO;
-using System.Threading;
 
 namespace DemoQA.Tests.Navigation
 {
@@ -20,7 +16,7 @@ namespace DemoQA.Tests.Navigation
         {
             Initialize(); 
             _demoQAMainPage = new MainPage(Driver);
-            Driver.Navigate().GoToUrl(_demoQAMainPage.URL);
+            Driver.GoToUrl(_demoQAMainPage.URL);
             _leftPannelAndMainHeader = new LeftPannelAndMainHeaderSection(Driver);
 
         }

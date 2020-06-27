@@ -15,7 +15,7 @@ namespace DemoQA.Tests.Interactions
         {
             Initialize();
             _draggablePage = new DraggablePage(Driver);
-            Driver.Navigate().GoToUrl(_draggablePage.URL);
+            Driver.GoToUrl(_draggablePage.URL);
         }
 
         [TearDown]
@@ -32,11 +32,11 @@ namespace DemoQA.Tests.Interactions
         public void DragAnElement()
         {
             _draggablePage.TabSimple.Click();
-            Point locationBefore = _draggablePage.DragBoxSimple.Location;
+            Point locationBefore = ElementLocation(_draggablePage.DragBoxSimple);
 
-            Builder.DragAndDropToOffset(_draggablePage.DragBoxSimple, 100, 100).Perform();
+            Builder.DragAndDropToOffset(_draggablePage.DragBoxSimple.WrappedElement, 100, 100).Perform();
 
-            Point locationAfter = _draggablePage.DragBoxSimple.Location;
+            Point locationAfter = ElementLocation(_draggablePage.DragBoxSimple);
 
             Assert.AreEqual(locationAfter.X, locationBefore.X + 100);
             Assert.AreEqual(locationAfter.Y, locationBefore.Y + 100);
@@ -45,11 +45,11 @@ namespace DemoQA.Tests.Interactions
         public void DragAnElementWithAxisYRestricted()
         {
             _draggablePage.TabAxisRestricted.Click();
-            Point locationBefore = _draggablePage.DragBoxOnlyX.Location;
+            Point locationBefore = ElementLocation(_draggablePage.DragBoxOnlyX);
 
-            Builder.DragAndDropToOffset(_draggablePage.DragBoxOnlyX, 100, 100).Perform();
+            Builder.DragAndDropToOffset(_draggablePage.DragBoxOnlyX.WrappedElement, 100, 100).Perform();
 
-            Point locationAfter = _draggablePage.DragBoxOnlyX.Location;
+            Point locationAfter = ElementLocation(_draggablePage.DragBoxOnlyX);
 
             Assert.AreEqual(locationAfter.X, locationBefore.X + 100);
             Assert.AreEqual(locationAfter.Y, locationBefore.Y);
@@ -58,11 +58,11 @@ namespace DemoQA.Tests.Interactions
         public void DragAnElementWithAxisXRestricted()
         {
             _draggablePage.TabAxisRestricted.Click();
-            Point locationBefore = _draggablePage.DragBoxOnlyY.Location;
+            Point locationBefore = ElementLocation(_draggablePage.DragBoxOnlyY);
 
-            Builder.DragAndDropToOffset(_draggablePage.DragBoxOnlyY, 100, 100).Perform();
+            Builder.DragAndDropToOffset(_draggablePage.DragBoxOnlyY.WrappedElement, 100, 100).Perform();
 
-            Point locationAfter = _draggablePage.DragBoxOnlyY.Location;
+            Point locationAfter = ElementLocation(_draggablePage.DragBoxOnlyY);
 
             Assert.AreEqual(locationAfter.X, locationBefore.X);
             Assert.AreEqual(locationAfter.Y, locationBefore.Y + 100);
@@ -77,7 +77,7 @@ namespace DemoQA.Tests.Interactions
             Assert.IsTrue(rigthBottomCornerDragBoxBefore.X < rightBottomCornerContainer.X, "Check if the right bottom corner X coordinate of the drag box is within the container box in the beginning of the test");
             Assert.IsTrue(rigthBottomCornerDragBoxBefore.Y < rightBottomCornerContainer.Y, "Check if the right bottom corner Y coordinate of the drag box is within the container box in the beginning of the test");
 
-            Builder.DragAndDropToOffset(_draggablePage.DragBoxWithinContainer, 550, 200).Perform(); // trying to drag the box out of the container
+            Builder.DragAndDropToOffset(_draggablePage.DragBoxWithinContainer.WrappedElement, 550, 200).Perform(); // trying to drag the box out of the container
 
             Point rigthBottomCornerDragBoxAfter = RectangleRightBottomCornerCoordinates(_draggablePage.DragBoxWithinContainer); // finding the coordinates of the right bottom corner of the drag box after dragging it
 

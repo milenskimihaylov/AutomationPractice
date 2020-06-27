@@ -11,16 +11,16 @@ namespace DemoQA.Pages.DemoQA
         {
         }
 
-        public WebElement MainHeader => Driver.FindElement(By.XPath("//div[@class='main-header']"));
+        public WebElement MainHeader => Driver.FindExistingElement(By.XPath("//div[@class='main-header']"));
 
         public WebElement SectionLeftPannel(string section)
         {
-            return Driver.FindElement(By.XPath($"//div[@class='header-text' and text()='{section}']"));
+            return Driver.FindExistingElement(By.XPath($"//div[@class='header-text' and text()='{section}']"));
         }
 
         public WebElement InteractionsSection(string section)
         {
-            return Driver.FindElement(By.XPath($"//li/span[text()='{section}']"));
+            return Driver.FindExistingElement(By.XPath($"//li/span[text()='{section}']"));
         }
 
         public void AssertSection(string expectedSection, string actualSection)

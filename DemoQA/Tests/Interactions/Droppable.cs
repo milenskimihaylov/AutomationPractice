@@ -3,6 +3,7 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System.Drawing;
+using System.Threading;
 
 namespace DemoQA.Tests.Interactions
 {
@@ -16,7 +17,7 @@ namespace DemoQA.Tests.Interactions
         {
             Initialize();
             _droppablePage = new DroppablePage(Driver);
-            Driver.Navigate().GoToUrl(_droppablePage.URL);
+            Driver.GoToUrl(_droppablePage.URL);
         }
 
         [TearDown]
@@ -34,11 +35,11 @@ namespace DemoQA.Tests.Interactions
         public void DragAndDropElementWithinABox()
         {
             _droppablePage.TabSimple.Click();
-            string dropBoxColorBefore = _droppablePage.DropBoxTabSimple.GetCssValue("background-color");
+            string[] dropBoxColorBefore = GetBackgroundColor(_droppablePage.DropBoxTabSimple);
 
-            Builder.DragAndDrop(_droppablePage.DragBox, _droppablePage.DropBoxTabSimple).Perform();
+            Builder.DragAndDrop(_droppablePage.DragBox.WrappedElement, _droppablePage.DropBoxTabSimple.WrappedElement).Perform();
 
-            string dropBoxColorAfter = _droppablePage.DropBoxTabSimple.GetCssValue("background-color");
+            string[] dropBoxColorAfter = GetBackgroundColor(_droppablePage.DropBoxTabSimple);
 
             Assert.AreNotEqual(dropBoxColorBefore, dropBoxColorAfter);
         }
@@ -46,11 +47,11 @@ namespace DemoQA.Tests.Interactions
         public void DragAndDropElementThatIsNotAccepted()
         {
             _droppablePage.TabAccept.Click();
-            string dropBoxColorBefore = _droppablePage.DropBoxTabAccept.GetCssValue("background-color");
+            string[] dropBoxColorBefore = GetBackgroundColor(_droppablePage.DropBoxTabAccept);
 
-            Builder.DragAndDrop(_droppablePage.DragBoxNotAcceptable, _droppablePage.DropBoxTabAccept).Perform();
+            Builder.DragAndDrop(_droppablePage.DragBoxNotAcceptable.WrappedElement, _droppablePage.DropBoxTabAccept.WrappedElement).Perform();
 
-            string dropBoxColorAfter = _droppablePage.DropBoxTabAccept.GetCssValue("background-color");
+            string[] dropBoxColorAfter = GetBackgroundColor(_droppablePage.DropBoxTabAccept);
 
             Assert.AreEqual(dropBoxColorBefore, dropBoxColorAfter);
         }
@@ -58,14 +59,14 @@ namespace DemoQA.Tests.Interactions
         public void DragAndDropElementThatWillRevertToItsFirstLocation()
         {
             _droppablePage.TabRevertDraggable.Click();
-            Point dragBoxWillRevertLocationBefore = _droppablePage.DragBoxWillRevert.Location;
-            string dropBoxColorBefore = _droppablePage.DropBoxTabRevert.GetCssValue("background-color");
+            Point dragBoxWillRevertLocationBefore = ElementLocation(_droppablePage.DragBoxWillRevert);
+            string[] dropBoxColorBefore = GetBackgroundColor(_droppablePage.DropBoxTabRevert);
 
-            Builder.DragAndDrop(_droppablePage.DragBoxWillRevert, _droppablePage.DropBoxTabRevert).Perform();
+            Builder.DragAndDrop(_droppablePage.DragBoxWillRevert.WrappedElement, _droppablePage.DropBoxTabRevert.WrappedElement).Perform();
 
-            Wait.Until(d => d.FindElement(By.Id("revertable")).GetAttribute("class").EndsWith("handle")); // wait for the state of the drag box when it wont be moving -> the div class ends with "handle"
-            Point dragBoxWillRevertLocationAfter = _droppablePage.DragBoxWillRevert.Location;
-            string dropBoxColorAfter = _droppablePage.DropBoxTabRevert.GetCssValue("background-color");
+            Driver.FindExistingElement(By.XPath("//div[@id='revertable' and not(contains(@class,'ui-draggable-dragging'))]")); // wait for the state of the drag box when it wont be moving -> the div class ends with "handle"
+            Point dragBoxWillRevertLocationAfter = ElementLocation(_droppablePage.DragBoxWillRevert);
+            string[] dropBoxColorAfter = GetBackgroundColor(_droppablePage.DropBoxTabRevert);
 
             Assert.AreEqual(dragBoxWillRevertLocationBefore, dragBoxWillRevertLocationAfter);
             Assert.AreNotEqual(dropBoxColorBefore, dropBoxColorAfter);

@@ -15,7 +15,7 @@ namespace DemoQA.Tests.Interactions
         {
             Initialize();
             _resizablePage = new ResizablePage(Driver);
-            Driver.Navigate().GoToUrl(_resizablePage.URL);
+            Driver.GoToUrl(_resizablePage.URL);
         }
 
         [TearDown]
@@ -35,7 +35,7 @@ namespace DemoQA.Tests.Interactions
             Point rightBottomCornerOfResizableBoxBefore = RectangleRightBottomCornerCoordinates(_resizablePage.ResizableBox);
             Driver.ScrollToElement(_resizablePage.ResizeButtonResizableBox);
 
-            Builder.DragAndDropToOffset(_resizablePage.ResizeButtonResizableBox, 100, 100).Perform();
+            Builder.DragAndDropToOffset(_resizablePage.ResizeButtonResizableBox.WrappedElement, 100, 100).Perform();
 
             Point rightBottomCornerOfResizableBoxAfter = RectangleRightBottomCornerCoordinates(_resizablePage.ResizableBox);
 
@@ -47,7 +47,7 @@ namespace DemoQA.Tests.Interactions
         {
             Size resizableBoxSizeBefore = _resizablePage.ResizableBoxWithRestriction.Size;
 
-            Builder.DragAndDropToOffset(_resizablePage.ResizeButtonResizableBoxWithRestriction, -100, -100).Perform();
+            Builder.DragAndDropToOffset(_resizablePage.ResizeButtonResizableBoxWithRestriction.WrappedElement, -100, -100).Perform();
 
             Size resizableBoxSizeAfter = _resizablePage.ResizableBoxWithRestriction.Size;
 

@@ -74,11 +74,28 @@ namespace DemoQA.Core
 
         public WebElement FindElement(By by)
         {
+            IWebElement nativeWebElement = Wait.Until(d => d.FindElement(by));
+            WebElement element = new WebElement(WrappedDriver, nativeWebElement, by);
+
+            return element;
+        }
+
+        public WebElement FindExistingElement(By by)
+        {
             IWebElement nativeWebElement = Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(by));
             WebElement element = new WebElement(WrappedDriver, nativeWebElement, by);
 
             return element;
         }
+
+        public WebElement FindClickableElement(By by)
+        {
+            IWebElement nativeWebElement = Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
+            WebElement element = new WebElement(WrappedDriver, nativeWebElement, by);
+
+            return element;
+        }
+
         public List<WebElement> FindElements(By by)
         {
             ReadOnlyCollection<IWebElement> nativeWebElements = Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
