@@ -60,5 +60,25 @@ namespace DemoQA.Tests.Navigation
 
             _leftPannelAndMainHeader.AssertSection(section, interactionsSectionName);
         }
+
+        [Test]
+        [TestCase("Accordian")]
+        [TestCase("Auto Complete")]
+        [TestCase("Date Picker")]
+        [TestCase("Slider")]
+        [TestCase("Progress Bar")]
+        [TestCase("Tabs")]
+        [TestCase("Tool Tips")]
+        [TestCase("Menu")]
+        [TestCase("Select Menu")]
+        public void NavigationWidgetsSection(string section)
+        {
+            Driver.ScrollToElement(_demoQAMainPage.SectionCard("Widgets")).Click();
+            string interactionsSectionName = _leftPannelAndMainHeader.InteractionsSection(section).Text;
+
+            Driver.ScrollToElement(_leftPannelAndMainHeader.InteractionsSection(section)).Click();
+
+            _leftPannelAndMainHeader.AssertSection(section, interactionsSectionName);
+        }
     }
 }
