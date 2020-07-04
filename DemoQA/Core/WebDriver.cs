@@ -106,5 +106,15 @@ namespace DemoQA.Core
 
             return elements;
         }
+
+        public void WaitForElementToBecomeInvisible(By locator)
+        {
+            _webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(locator));
+        }
+
+        public void WaitForStalenessOfElement(WebElement element)
+        {
+            _webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(element.WrappedElement));
+        }
     }
 }
