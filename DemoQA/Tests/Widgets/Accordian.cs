@@ -2,9 +2,8 @@
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using System.Drawing;
 
-namespace DemoQA.Tests.Interactions
+namespace DemoQA.Tests.Widgets
 {
     [TestFixture]
     public class Accordian : BaseTest

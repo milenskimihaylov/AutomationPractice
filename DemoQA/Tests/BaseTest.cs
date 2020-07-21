@@ -12,7 +12,6 @@ using System.Threading;
 
 namespace DemoQA
 {
-    [TestFixture]
     public class BaseTest
     {
         protected WebDriver Driver { get; set; }
